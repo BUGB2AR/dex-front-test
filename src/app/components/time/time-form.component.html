@@ -1,0 +1,42 @@
+<div class="container">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{isEdit ? 'Editar' : 'Novo'}} Time</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <br>
+        <form (ngSubmit)="saveTeam()">
+  
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Data</mat-label>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="team.data" name="data" required>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+  
+          <h3>Integrantes</h3>
+          <div class="integrantes-container">
+            <mat-selection-list>
+              <mat-list-option 
+                *ngFor="let integrante of integrantesDisponiveis" 
+                [selected]="isSelected(integrante)"
+                (click)="toggleIntegrante(integrante)">
+                {{integrante.nome}}
+              </mat-list-option>
+            </mat-selection-list>
+          </div>
+  
+          <div class="form-actions">
+            <button mat-raised-button color="primary" type="submit" [disabled]="loading">
+              Salvar
+            </button>
+            <button mat-raised-button type="button" routerLink="/times">
+              Cancelar
+            </button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  
+    <mat-spinner *ngIf="loading" diameter="50"></mat-spinner>
+  </div>

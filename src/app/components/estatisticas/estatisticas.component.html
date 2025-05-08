@@ -1,0 +1,95 @@
+<div class="container">
+    <h1>Estatísticas</h1>
+  
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Time da Data</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-form-field>
+          <mat-label>Data</mat-label>
+          <input matInput [matDatepicker]="picker" [(ngModel)]="data">
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="buscarTimeDaData()" [disabled]="loading">Buscar</button>
+        
+        <div *ngIf="timeDaData" class="result-section">
+          <h3>Time em {{timeDaData.data | date}}</h3>
+          <mat-list>
+            <mat-list-item *ngFor="let integrante of timeDaData.integrantes">{{integrante}}</mat-list-item>
+          </mat-list>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Intervalo de Datas</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="date-range">
+          <mat-form-field>
+            <mat-label>Data Inicial</mat-label>
+            <input matInput [matDatepicker]="pickerInicial" [(ngModel)]="dataInicial">
+            <mat-datepicker-toggle matIconSuffix [for]="pickerInicial"></mat-datepicker-toggle>
+            <mat-datepicker #pickerInicial></mat-datepicker>
+          </mat-form-field>
+          
+          <mat-form-field>
+            <mat-label>Data Final</mat-label>
+            <input matInput [matDatepicker]="pickerFinal" [(ngModel)]="dataFinal">
+            <mat-datepicker-toggle matIconSuffix [for]="pickerFinal"></mat-datepicker-toggle>
+            <mat-datepicker #pickerFinal></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  
+    <div class="stats-grid">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Função Mais Comum</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <button mat-raised-button color="primary" (click)="buscarFuncaoMaisComum()" [disabled]="loading">Buscar</button>
+          
+          <div *ngIf="funcaoMaisComum" class="result-section">
+            <h3>{{funcaoMaisComum.funcao}}</h3>
+          </div>
+        </mat-card-content>
+      </mat-card>
+  
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Franquia Mais Famosa</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <button mat-raised-button color="primary" (click)="buscarFranquiaMaisFamosa()" [disabled]="loading">Buscar</button>
+          
+          <div *ngIf="franquiaMaisFamosa" class="result-section">
+            <h3>{{franquiaMaisFamosa.franquia}}</h3>
+          </div>
+        </mat-card-content>
+      </mat-card>
+  
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Contagem por Franquia</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <button mat-raised-button color="primary" (click)="buscarContagemPorFranquia()" [disabled]="loading">Buscar</button>
+          
+          <div *ngIf="contagemPorFranquia" class="result-section">
+            <mat-list>
+              <mat-list-item *ngFor="let franquia of contagemPorFranquia.franquias | keyvalue">
+                {{franquia.key}}: {{franquia.value}}
+              </mat-list-item>
+            </mat-list>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  
+    <mat-spinner *ngIf="loading" diameter="50"></mat-spinner>
+  </div>

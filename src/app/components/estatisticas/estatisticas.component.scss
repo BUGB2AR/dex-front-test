@@ -1,0 +1,32 @@
+.container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  mat-card {
+    margin-bottom: 20px;
+  }
+  
+  .date-range {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  .result-section {
+    margin-top: 20px;
+  }
+  
+  button {
+    margin-right: 10px;
+  }
+  
+  mat-spinner {
+    margin: 20px auto;
+  }

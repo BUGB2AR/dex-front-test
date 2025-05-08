@@ -1,0 +1,38 @@
+<div class="container">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{isEdit ? 'Editar' : 'Novo'}} Integrante</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form (ngSubmit)="saveIntegrante()">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Nome</mat-label>
+            <input matInput [(ngModel)]="integrante.nome" name="nome" required>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Franquia</mat-label>
+            <input matInput [(ngModel)]="integrante.franquia" name="franquia" required>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Função</mat-label>
+            <mat-select [(ngModel)]="integrante.funcao" name="funcao" required>
+              <mat-option *ngFor="let funcao of funcoes" [value]="funcao">{{funcao}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+  
+          <div class="form-actions">
+            <button mat-raised-button color="primary" type="submit" [disabled]="loading">
+              Salvar
+            </button>
+            <button mat-raised-button type="button" routerLink="/integrantes">
+              Cancelar
+            </button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  
+    <mat-spinner *ngIf="loading" diameter="50"></mat-spinner>
+  </div>
