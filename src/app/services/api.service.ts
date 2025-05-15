@@ -44,7 +44,7 @@ export class ApiService {
   }
 
   getTeamDaData(data: string): Observable<TimeDaData> {
-    return this.http.get<TimeDaData>(`${this.API_URL}/estatisticas/Team-da-data?data=${data}`);
+    return this.http.get<TimeDaData>(`${this.API_URL}/estatisticas/time-da-data?data=${data}`);
   }
 
   getIntegranteMaisUsado(dataInicial?: string, dataFinal?: string): Observable<Integrante> {
@@ -56,7 +56,7 @@ export class ApiService {
   }
 
   getTeamMaisComum(dataInicial?: string, dataFinal?: string): Observable<string[]> {
-    let url = `${this.API_URL}/estatisticas/Team-mais-comum`;
+    let url = `${this.API_URL}/estatisticas/time-mais-comum`;
     if (dataInicial && dataFinal) {
       url += `?dataInicial=${dataInicial}&dataFinal=${dataFinal}`;
     }
