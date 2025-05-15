@@ -1,27 +1,23 @@
 # DexTeamFrontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.2.
+Este projeto foi gerado com o [Angular CLI](https://github.com/angular/angular-cli) versão 17.3.2.
 
-## Development server
+## Descrição do Projeto
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Este projeto consiste em uma aplicação frontend desenvolvida com Angular, que possui duas telas principais:
 
-## Code scaffolding
+1. **Tela Principal**: A tela inicial da aplicação, onde o usuário pode interagir com as funcionalidades principais.
+2. **Tela de Listagem**: Exibe uma lista de itens ou dados, permitindo visualizações detalhadas.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Abaixo estão as imagens representativas dessas duas telas:
 
-## Build
+### Tela Principal
+![Tela Principal](https://github.com/BUGB2AR/dex-front-test/blob/main/tela%20principal.png)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Tela de Listagem
+![Tela de Listagem](https://github.com/BUGB2AR/dex-front-test/blob/main/Tela%20de%20listagem.png)
 
-## Running unit tests
+## Servidor de Desenvolvimento
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Para rodar o servidor de desenvolvimento, execute o seguinte comando:
+npm install e em seguida ng serve ou usar o proprio npm start.
