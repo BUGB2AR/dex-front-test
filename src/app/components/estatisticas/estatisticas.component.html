@@ -14,7 +14,7 @@
         </mat-form-field>
         <button mat-raised-button color="primary" (click)="buscarTimeDaData()" [disabled]="loading">Buscar</button>
         
-        <div *ngIf="timeDaData" class="result-section">
+        <div *ngIf="timeDaData" class="result-list">
           <h3>Time em {{timeDaData.data | date}}</h3>
           <mat-list>
             <mat-list-item *ngFor="let integrante of timeDaData.integrantes">{{integrante}}</mat-list-item>
@@ -47,6 +47,39 @@
     </mat-card>
   
     <div class="stats-grid">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Integrante Mais Usado</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <button mat-raised-button color="primary" (click)="buscarIntegranteMaisUsado()" [disabled]="loading">Buscar</button>
+        
+        <div *ngIf="integranteMaisUsado" class="result-section">
+          <h3>{{integranteMaisUsado.nome}}</h3>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Time Mais Comum</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <button mat-raised-button color="primary" (click)="buscarTimeMaisComum()" [disabled]="loading">Buscar</button>
+        
+        <div *ngIf="timesMaisComuns && timesMaisComuns.length > 0" class="result-section">
+          <mat-list>
+            <mat-list-item *ngFor="let time of timesMaisComuns">
+              <div class="w-full">
+                <div><strong>Time ID:</strong> {{ time.timeId  }}</div>
+              </div>
+            </mat-list-item>
+          </mat-list>
+        </div>
+        
+      </mat-card-content>
+    </mat-card>
+
       <mat-card>
         <mat-card-header>
           <mat-card-title>Função Mais Comum</mat-card-title>
@@ -86,6 +119,19 @@
                 {{franquia.key}}: {{franquia.value}}
               </mat-list-item>
             </mat-list>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Contagem por Função</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <button mat-raised-button color="primary" (click)="buscarContagemPorFuncao()" [disabled]="loading">Buscar</button>
+        
+        <div *ngIf="contagemPorFuncao" class="result-section">
+          <h3>Total: {{contagemPorFuncao.quantidade}}</h3>
           </div>
         </mat-card-content>
       </mat-card>

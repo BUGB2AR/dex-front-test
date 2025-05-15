@@ -7,6 +7,8 @@ import { TimeDaData } from '../models/time.da.data.model';
 import { FuncaoMaisComum } from '../models/funcao.mais.comum.model';
 import { FranquiaMaisFamosa } from '../models/franquia.mais.famosa';
 import { ContagemPorFranquia } from '../models/contagem.por.franquia.model';
+import { TimeMaisComumDTO } from '../models/time-mais-comum';
+
 
 
 @Injectable({ providedIn: 'root' })
@@ -63,13 +65,14 @@ export class ApiService {
     return this.http.get<Integrante>(url).pipe(catchError(this.handleError));
   }
 
-  getTeamMaisComum(dataInicial?: string, dataFinal?: string): Observable<string[]> {
-    let url = `${this.API_URL}/estatisticas/time-mais-comum`;
+  getTeamMaisComum(dataInicial?: string, dataFinal?: string): Observable<TimeMaisComumDTO[]> {
+    let url = `${this.API_URL}/estatisticas/time-mais-comum-detalhado`;
     if (dataInicial && dataFinal) {
       url += `?dataInicial=${dataInicial}&dataFinal=${dataFinal}`;
     }
-    return this.http.get<string[]>(url).pipe(catchError(this.handleError));
+    return this.http.get<TimeMaisComumDTO[]>(url).pipe(catchError(this.handleError));
   }
+  
 
   getFuncaoMaisComum(dataInicial?: string, dataFinal?: string): Observable<FuncaoMaisComum> {
     let url = `${this.API_URL}/estatisticas/funcao-mais-comum`;

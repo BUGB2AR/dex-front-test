@@ -16,6 +16,8 @@ import { ContagemPorFranquia } from '../../models/contagem.por.franquia.model';
 import { FuncaoMaisComum } from '../../models/funcao.mais.comum.model';
 import { TimeDaData } from '../../models/time.da.data.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Integrante } from '../../models/integrante.model';
+import { TimeMaisComumDTO } from '../../models/time-mais-comum';
 
 @Component({
   selector: 'app-estatisticas',
@@ -42,10 +44,14 @@ export class EstatisticasComponent {
   dataFinal: Date | null = null;
   
   timeDaData: TimeDaData | null = null;
+  integranteMaisUsado: Integrante | null = null;
+  timesMaisComuns: TimeMaisComumDTO[] = [];
   funcaoMaisComum: FuncaoMaisComum | null = null;
   contagemPorFranquia: ContagemPorFranquia | null = null;
   franquiaMaisFamosa: FranquiaMaisFamosa | null = null;
-  
+  contagemPorFuncao: {quantidade: number} | null = null;
+  timeIdMaisComum: number | null = null;
+
   loading = false;
 
   constructor(
@@ -88,6 +94,59 @@ export class EstatisticasComponent {
     this.apiService.getFuncaoMaisComum(dataInicial, dataFinal).subscribe({
       next: (result) => {
         this.funcaoMaisComum = result;
+        this.loading = false;
+      },
+      error: (error) => {
+        this.loading = false;
+        this.showError(error);
+      }
+    });
+  }
+
+  buscarIntegranteMaisUsado() {
+    this.loading = true;
+    const dataInicial = this.formatarDataParaAPI(this.dataInicial);
+    const dataFinal = this.formatarDataParaAPI(this.dataFinal);
+    
+    this.apiService.getIntegranteMaisUsado(dataInicial, dataFinal).subscribe({
+      next: (result) => {
+        this.integranteMaisUsado = result;
+        this.loading = false;
+      },
+      error: (error) => {
+        this.loading = false;
+        this.showError(error);
+      }
+    });
+  }
+
+buscarTimeMaisComum() {
+  this.loading = true;
+
+  const dataInicial = this.formatarDataParaAPI(this.dataInicial);
+  const dataFinal = this.formatarDataParaAPI(this.dataFinal);
+
+  this.apiService.getTeamMaisComum(dataInicial, dataFinal).subscribe({
+    next: (result: any) => {
+      console.log('Integrantes do time mais comum:', result);
+      this.timesMaisComuns = result ? [result] : [];
+      this.loading = false;
+    },
+    error: (error) => {
+      this.loading = false;
+      this.showError(error);
+    }
+  });
+}
+  
+  buscarContagemPorFuncao() {
+    this.loading = true;
+    const dataInicial = this.formatarDataParaAPI(this.dataInicial);
+    const dataFinal = this.formatarDataParaAPI(this.dataFinal);
+    
+    this.apiService.getContagemPorFuncao(dataInicial, dataFinal).subscribe({
+      next: (result) => {
+        this.contagemPorFuncao = result;
         this.loading = false;
       },
       error: (error) => {
