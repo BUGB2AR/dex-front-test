@@ -10,6 +10,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ApiService } from '../../services/api.service';
 import { Integrante } from '../../models/integrante.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-integrante-form',
@@ -42,7 +43,8 @@ export class IntegranteFormComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -60,7 +62,10 @@ export class IntegranteFormComponent implements OnInit {
         this.integrante = integrante;
         this.loading = false;
       },
-      error: () => this.loading = false
+      error: (error) => {
+        this.loading = false;
+        this.showError(error);
+      }
     });
   }
 
@@ -71,7 +76,17 @@ export class IntegranteFormComponent implements OnInit {
         this.loading = false;
         this.router.navigate(['/integrantes']);
       },
-      error: () => this.loading = false
+      error: (error) => {
+        this.loading = false;
+        this.showError(error);
+      }
+    });
+  }
+
+  private showError(error: Error) {
+    this.snackBar.open(error.message, 'Fechar', { 
+      duration: 5000,
+      panelClass: ['error-snackbar']
     });
   }
 }

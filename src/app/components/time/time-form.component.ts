@@ -17,6 +17,7 @@ import { Team } from '../../models/time.model';
 import { ComposicaoTime } from '../../models/composicao-time.model';  // Adicionando o novo modelo
 
 import { MatListModule } from '@angular/material/list';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-team-form',
@@ -56,7 +57,8 @@ export class TeamFormComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -77,7 +79,10 @@ export class TeamFormComponent implements OnInit {
         this.integrantesSelecionados = team.composicao.map(composicao => composicao.integrante);
         this.loading = false;
       },
-      error: () => this.loading = false
+      error: (error) => {
+        this.loading = false;
+        this.showError(error);
+      }
     });
   }
 
@@ -88,8 +93,6 @@ export class TeamFormComponent implements OnInit {
   }
 
   saveTeam() {
- 
-  
     this.team.composicao = this.integrantesSelecionados.map(integrante => ({
       time: { id: this.team.id! },  
       integrante: integrante  
@@ -104,7 +107,10 @@ export class TeamFormComponent implements OnInit {
         this.loading = false;
         this.router.navigate(['/teams']); 
       },
-      error: () => this.loading = false,
+      error: (error) =>{
+        this.loading = false
+        this.showError(error);
+      },
     });
   }
   
@@ -120,5 +126,12 @@ export class TeamFormComponent implements OnInit {
 
   isSelected(integrante: Integrante): boolean {
     return this.integrantesSelecionados.some(i => i.id === integrante.id);
+  }
+
+  private showError(error: Error) {
+    this.snackBar.open(error.message, 'Fechar', { 
+      duration: 5000,
+      panelClass: ['error-snackbar']
+    });
   }
 }
