@@ -9,8 +9,6 @@ import { FranquiaMaisFamosa } from '../models/franquia.mais.famosa';
 import { ContagemPorFranquia } from '../models/contagem.por.franquia.model';
 import { TimeMaisComumDTO } from '../models/time-mais-comum';
 
-
-
 @Injectable({ providedIn: 'root' })
 export class ApiService {
   private readonly API_URL = 'http://localhost:8080/api';
@@ -73,7 +71,6 @@ export class ApiService {
     return this.http.get<TimeMaisComumDTO[]>(url).pipe(catchError(this.handleError));
   }
   
-
   getFuncaoMaisComum(dataInicial?: string, dataFinal?: string): Observable<FuncaoMaisComum> {
     let url = `${this.API_URL}/estatisticas/funcao-mais-comum`;
     if (dataInicial && dataFinal) {
