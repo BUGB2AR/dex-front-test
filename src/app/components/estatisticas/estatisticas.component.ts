@@ -73,9 +73,9 @@ export class EstatisticasComponent {
         this.timeDaData = result;
         this.loading = false;
       },
-      error: () => {
+      error: (error) => {
         this.loading = false;
-        this.snackBar.open('Erro ao buscar time da data', 'Fechar', { duration: 3000 });
+        this.showError(error);
       }
     });
   }
@@ -90,9 +90,9 @@ export class EstatisticasComponent {
         this.funcaoMaisComum = result;
         this.loading = false;
       },
-      error: () => {
+      error: (error) => {
         this.loading = false;
-        this.snackBar.open('Erro ao buscar função mais comum', 'Fechar', { duration: 3000 });
+        this.showError(error);
       }
     });
   }
@@ -107,9 +107,9 @@ export class EstatisticasComponent {
         this.contagemPorFranquia = result;
         this.loading = false;
       },
-      error: () => {
+      error: (error) => {
         this.loading = false;
-        this.snackBar.open('Erro ao buscar contagem por franquia', 'Fechar', { duration: 3000 });
+        this.showError(error);
       }
     });
   }
@@ -129,10 +129,17 @@ export class EstatisticasComponent {
         this.franquiaMaisFamosa = result;
         this.loading = false;
       },
-      error: () => {
+      error: (error) => {
         this.loading = false;
-        this.snackBar.open('Erro ao buscar franquia mais famosa', 'Fechar', { duration: 3000 });
+        this.showError(error);
       }
+    });
+  }
+  
+  private showError(error: Error) {
+    this.snackBar.open(error.message, 'Fechar', { 
+      duration: 5000,
+      panelClass: ['error-snackbar']
     });
   }
 }
