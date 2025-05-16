@@ -17,9 +17,19 @@
   
           <mat-form-field appearance="outline" class="full-width">
             <mat-label>Função</mat-label>
-            <mat-select [(ngModel)]="integrante.funcao" name="funcao" required>
-              <mat-option *ngFor="let funcao of funcoes" [value]="funcao">{{funcao}}</mat-option>
-            </mat-select>
+            <input
+              type="text"
+              matInput
+              [(ngModel)]="integrante.funcao"
+              name="funcao"
+              [matAutocomplete]="auto"
+              required
+            />
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let funcao of funcoes" [value]="funcao">
+                {{ funcao }}
+              </mat-option>
+            </mat-autocomplete>
           </mat-form-field>
   
           <div class="form-actions">

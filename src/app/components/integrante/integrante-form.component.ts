@@ -11,7 +11,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ApiService } from '../../services/api.service';
 import { Integrante } from '../../models/integrante.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 @Component({
   selector: 'app-integrante-form',
   standalone: true,
@@ -24,7 +24,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     MatCardModule,
     MatSelectModule,
     MatProgressSpinnerModule,
-    RouterModule
+    RouterModule,
+    MatAutocompleteModule
   ],
   templateUrl: './integrante-form.component.html',
   styleUrls: ['./integrante-form.component.scss']
